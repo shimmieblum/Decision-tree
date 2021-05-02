@@ -10,6 +10,7 @@ class MinHeap():
         self.__bubble_up()
         self.heap_size += 1
         
+        
     def __bubble_up(self):
         ''' traverse tree and bubble up the last value to maintain the heap property '''
         i = self.heap_size
@@ -28,8 +29,6 @@ class MinHeap():
         self.heap_size -=1
         self.__bubble_down()
         return node
-    
-    def get_key(self, key):
         
         
     def __bubble_down(self):
