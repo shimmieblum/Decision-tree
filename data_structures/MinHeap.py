@@ -1,5 +1,6 @@
 import math
 
+
 class MinHeap():
     def __init__(self) -> None:
         self.tree_array = []
@@ -25,19 +26,22 @@ class MinHeap():
             
     def delete_min(self) -> 'HeapNode':
         node = self.tree_array[0]
-        self.tree_array[0] = self.tree_array.pop(self.heap_size-1)
         self.heap_size -=1
+        if self.heap_size == 0: self.tree_array.pop(0)
+        else: self.tree_array[0] = self.tree_array.pop(self.heap_size-1)
         self.__bubble_down()
         return node
-        
+    
+    def is_empty(self):
+        return self.heap_size == 0
         
     def __bubble_down(self):
-        children = [1,2]
         i = 0
+        children = [(i * 2 )+ x for x in [1,2] if ( i* 2 ) + x  < self.heap_size]
         while children != []: 
-            print(f'parent: {i}')
+            # print(f'parent: {i}')
             swap_child = min(children, key=lambda c: self.tree_array[c])
-            print(f'swap child {swap_child}' )
+            # print(f'swap child {swap_child}' )
             if self.tree_array[i] > self.tree_array[swap_child]:
                 self.tree_array[i], self.tree_array[swap_child] = self.tree_array[swap_child], self.tree_array[i]
                 children = [(swap_child * 2 )+ x for x in [1,2] if (swap_child * 2 ) + x  < self.heap_size] 
@@ -68,6 +72,8 @@ class MinHeap():
             next_gen = []
             # if d != depth: print(s.center(width, ' '))
             print(s)
+            
+    
 
 
 
@@ -75,6 +81,10 @@ class HeapNode():
     def __init__(self, key, value) -> None:
         self.key = key
         self.value = value
+        
+    def get(self):
+        ''' returns the key value pair '''
+        return self.key, self.value 
         
     ' === allow comparison between nodes === '
     
